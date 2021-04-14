@@ -125,7 +125,7 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
         myCluster <- parallel::makeCluster(11, # number of cores to use
                                  type = "PSOCK")
         doParallel::registerDoParallel(myCluster)
-        foreach(i=c(2:k.max))%dopar%{
+        foreach::foreach(i=c(2:k.max))%dopar%{
           clust <- FUNcluster(x, i, ...)
           v[i] <- .get_ave_sil_width(diss, clust$cluster)
         }
