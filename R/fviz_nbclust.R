@@ -122,7 +122,7 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
       
       v <- rep(0, k.max)
       if(method == "silhouette"){
-        myCluster <- makeCluster(11, # number of cores to use
+        myCluster <- parallel::makeCluster(11, # number of cores to use
                                  type = "PSOCK")
         doParallel::registerDoParallel(myCluster)
         foreach(i=c(2:k.max))%dopar%{
@@ -132,7 +132,7 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
         stopCluster(myCluster)
       }
       else if(method == "wss"){
-        myCluster <- makeCluster(11, # number of cores to use
+        myCluster <- parallel::makeCluster(11, # number of cores to use
                                  type = "PSOCK")
         doParallel::registerDoParallel(myCluster)
         foreach(i=c(2:k.max))%dopar%{
