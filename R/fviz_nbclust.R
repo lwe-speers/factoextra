@@ -122,17 +122,24 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
       
       v <- rep(0, k.max)
       if(method == "silhouette"){
-        for(i in 2:k.max){
+        myCluster <- makeCluster(11, # number of cores to use
+                                 type = "PSOCK")
+        doParallel::registerDoParallel(myCluster)
+        foreach(i=c(2:k.max))%dopar%{
           clust <- FUNcluster(x, i, ...)
           v[i] <- .get_ave_sil_width(diss, clust$cluster)
         }
+        stopCluster(myCluster)
       }
       else if(method == "wss"){
-        for(i in 1:k.max){
+        myCluster <- makeCluster(11, # number of cores to use
+                                 type = "PSOCK")
+        doParallel::registerDoParallel(myCluster)
+        foreach(i=c(2:k.max))%dopar%{
           clust <- FUNcluster(x, i, ...)
           v[i] <- .get_withinSS(diss, clust$cluster)
         }
-        
+        stopCluster(myCluster)
       }
       
       df <- data.frame(clusters = as.factor(1:k.max), y = v, stringsAsFactors = TRUE)
