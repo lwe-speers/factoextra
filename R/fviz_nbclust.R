@@ -132,6 +132,7 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
         stopCluster(myCluster)
       }
       else if(method == "wss"){
+        print(x)
         myCluster <- parallel::makeCluster(11, # number of cores to use
                                  type = "PSOCK")
         doParallel::registerDoParallel(myCluster)
