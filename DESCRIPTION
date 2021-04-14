@@ -31,9 +31,7 @@ Imports:
     reshape2,
     ggrepel,
     tidyr,
-    doParallel,
-    doSNOW,
-    doMPI
+    doParallel
 Suggests:
     ade4,
     ca,
