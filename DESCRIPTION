@@ -30,7 +30,10 @@ Imports:
     stats,
     reshape2,
     ggrepel,
-    tidyr
+    tidyr,
+    doParallel,
+    doSNOW,
+    doMPI
 Suggests:
     ade4,
     ca,
