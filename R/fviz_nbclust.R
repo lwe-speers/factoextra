@@ -138,6 +138,7 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
         foreach(i=c(2:k.max))%dopar%{
           clust <- FUNcluster(x, i, ...)
           v[i] <- .get_withinSS(diss, clust$cluster)
+          print(v[i])
         }
         stopCluster(myCluster)
       }
